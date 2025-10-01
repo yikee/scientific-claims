@@ -442,16 +442,40 @@
                     { id: "c2", source: "synthetic", text: "QLoRA reduces the inference time of 65B-parameter language models compared to standard finetuning approaches.", label: "refute", status: null }
                 ]
             },
-            t5: {
+            modelswarms: {
                 paper: {
-                    title: "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
-                    publicationDate: "2020-10-01",
-                    url: "https://arxiv.org/abs/1910.10683",
-                    abstract: "Transfer learning, where a model is first pre-trained on a data-rich task before being fine-tuned on a downstream task, has emerged as a powerful technique in natural language processing (NLP). The effectiveness of transfer learning has given rise to a diversity of approaches, methodology, and practice. In this paper, we explore the landscape of transfer learning techniques for NLP by introducing a unified framework that converts every language problem into a text-to-text format. Our systematic study compares pre-training objectives, architectures, unlabeled datasets, transfer approaches, and other factors on dozens of language understanding tasks. By combining the insights from our exploration with scale and our new \"Colossal Clean Crawled Corpus\", we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more. To facilitate future work on transfer learning for NLP, we release our dataset, pre-trained models, and code."
+                    title: "Model Swarms: Collaborative Search to Adapt LLM Experts via Swarm Intelligence",
+                    publicationDate: "2024-10-15",
+                    url: "https://www.semanticscholar.org/paper/492d4d5c7341ae63abdcb044b073dfd59e2a8ee3",
+                    abstract: "We propose Model Swarms, a collaborative search algorithm to adapt LLMs via swarm intelligence, the collective behavior guiding individual systems. Specifically, Model Swarms starts with a pool of LLM experts and a utility function. Guided by the best-found checkpoints across models, diverse LLM experts collaboratively move in the weight space and optimize a utility function representing model adaptation objectives. Compared to existing model composition approaches, Model Swarms offers tuning-free model adaptation, works in low-data regimes with as few as 200 examples, and does not require assumptions about specific experts in the swarm or how they should be composed. Extensive experiments demonstrate that Model Swarms could flexibly adapt LLM experts to a single task, multi-task domains, reward models, as well as diverse human interests, improving over 12 model composition baselines by up to 21.0% across tasks and contexts. Further analysis reveals that LLM experts discover previously unseen capabilities in initial checkpoints and that Model Swarms enable the weak-to-strong transition of experts through the collaborative search process."
                 },
                 claims: [
-                    { id: "c1", source: "synthetic", text: "T5 reframes all NLP tasks as text-to-text problems using a unified transformer architecture.", label: "support", status: null },
-                    { id: "c2", source: "synthetic", text: "T5 requires specialized hardware for training and inference compared to traditional NLP models.", label: "refute", status: null }
+                    { id: "c1", source: "synthetic", text: "Model Swarms enable tuning-free, collaborative LLM adaptation via swarm intelligence, outperforming baselines by up to 21% with minimal data.", label: "support", status: null },
+                    { id: "c2", source: "synthetic", text: "Model Swarms improve LLM performance by incorporating real-time human feedback during the collaborative adaptation process.", label: "refute", status: null }
+                ]
+            },
+            selfinstruct: {
+                paper: {
+                    title: "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+                    publicationDate: "2022-12-20",
+                    url: "https://www.semanticscholar.org/paper/e65b346d442e9962a4276dc1c1af2956d9d5f1eb",
+                    abstract: "Large “instruction-tuned” language models (i.e., finetuned to respond to instructions) have demonstrated a remarkable ability to generalize zero-shot to new tasks. Nevertheless, they depend heavily on human-written instruction data that is often limited in quantity, diversity, and creativity, therefore hindering the generality of the tuned model. We introduce Self-Instruct, a framework for improving the instruction-following capabilities of pretrained language models by bootstrapping off their own generations. Our pipeline generates instructions, input, and output samples from a language model, then filters invalid or similar ones before using them to finetune the original model. Applying our method to the vanilla GPT3, we demonstrate a 33% absolute improvement over the original model on Super-NaturalInstructions, on par with the performance of InstructGPT-001, which was trained with private user data and human annotations. For further evaluation, we curate a set of expert-written instructions for novel tasks, and show through human evaluation that tuning GPT3 with Self-Instruct outperforms using existing public instruction datasets by a large margin, leaving only a 5% absolute gap behind InstructGPT-001. Self-Instruct provides an almost annotation-free method for aligning pre-trained language models with instructions, and we release our large synthetic dataset to facilitate future studies on instruction tuning."
+                },
+                claims: [
+                    { id: "c1", source: "synthetic", text: "Self-Instruct improves instruction-following capabilities of pretrained LLMs (e.g., GPT-3) by bootstrapping from their own generations, achieving performance near InstructGPT-001 without human-annotated data.", label: "support", status: null },
+                    { id: "c2", source: "synthetic", text: "Self-Instruct enhances model alignment by incorporating human-in-the-loop feedback during instruction generation.", label: "refute", status: null }
+                ]
+            },
+            metaphor: {
+                paper: {
+                    title: "Metaphor Detection with Cross-Lingual Model Transfer",
+                    publicationDate: "2014-06-01",
+                    url: "https://www.semanticscholar.org/paper/ef1d93b03c20b2f488b66e8e2c24fceb2105d58f",
+                    abstract: "We show that it is possible to reliably discriminate whether a syntactic construction is meant literally or metaphorically using lexical semantic features of the words that participate in the construction. Our model is constructed using English resources, and we obtain state-of-the-art performance relative to previous work in this language. Using a model transfer approach by pivoting through a bilingual dictionary, we show our model can identify metaphoric expressions in other languages. We provide results on three new test sets in Spanish, Farsi, and Russian. The results support the hypothesis that metaphors are conceptual, rather than lexical, in nature."
+                },
+                claims: [
+                    { id: "c1", source: "synthetic", text: "Lexical semantic features enable reliable discrimination between literal and metaphorical uses of syntactic constructions, achieving state-of-the-art performance in English.", label: "support", status: null },
+                    { id: "c2", source: "synthetic", text: "The feature-based lexical semantic classification model replicates the cognitive processes humans use to distinguish between literal and metaphorical language.", label: "refute", status: null } 
                 ]
             }
         };
