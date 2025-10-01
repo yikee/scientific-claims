@@ -50,6 +50,14 @@
             color: #991b1b;
         }
         
+        .text-green-700 {
+            color: #15803d;
+        }
+        
+        .text-amber-700 {
+            color: #a16207;
+        }
+        
         .bg-white {
             background-color: #ffffff;
         }
@@ -232,6 +240,11 @@
         .text-base {
             font-size: 1rem;
             line-height: 1.5rem;
+        }
+        
+        .text-lg-textarea {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
         }
         
         .font-semibold {
@@ -447,7 +460,7 @@
                     <div class="mb-6">
                         <textarea
                             id="claim-supported"
-                            class="w-full min-h-5rem rounded border p-2 text-gray-500"
+                            class="w-full min-h-5rem rounded border p-2 text-gray-500 text-lg-textarea"
                             placeholder="Enter your main supported claim here..."
                         >QLoRA enables full-performance finetuning of 65B-parameter language models on a single 48 GB GPU by using 4-bit quantization and low-rank adapters.</textarea>
                         <div class="flex justify-end">
@@ -476,7 +489,7 @@
                     <div class="mb-6">
                         <textarea
                             id="claim-unsupported"
-                            class="w-full min-h-5rem rounded border p-2 text-gray-500"
+                            class="w-full min-h-5rem rounded border p-2 text-gray-500 text-lg-textarea"
                             placeholder="Enter your relevant but unsupported claim here..."
                         >QLoRA reduces the inference time of 65B-parameter language models compared to standard finetuning approaches.</textarea>
                         <div class="flex justify-end">
@@ -505,7 +518,7 @@
                     <textarea 
                         id="comments" 
                         placeholder="Any feedback or questions?" 
-                        class="w-full min-h-4rem rounded border p-2"
+                        class="w-full min-h-4rem rounded border p-2 text-lg-textarea"
                     ></textarea>
                 </div>
             </section>
@@ -518,15 +531,16 @@
                         <div class="space-y-3">
                             <div class="flex items-start gap-3">
                                 <input id="consent" type="checkbox" class="mt-1 h-4 w-4" />
-                                <label for="consent" class="text-sm">I understand my annotations will be used for research purposes and I will not submit any sensitive or confidential info.</label>
+                                <label for="consent" class="text-base">I understand my annotations will be used for research purposes and I will not submit any sensitive or confidential info.</label>
                             </div>
                             <div id="error-messages" class="border border-red-200 bg-red-50 text-red-800 rounded p-3 text-sm" style="display: none;">
                                 <ul class="list-disc pl-5" id="error-list"></ul>
                             </div>
-                            <div class="flex gap-3">
-                                <button type="submit" class="px-4 py-2 rounded bg-gray-900 text-white hover:bg-black disabled:opacity-50">
+                            <div class="flex gap-3 items-center">
+                                <button type="submit" class="px-4 py-2 rounded bg-gray-900 text-white hover:bg-black disabled:opacity-50 text-base">
                                     Submit
                                 </button>
+                                <span id="submit-status" class="text-sm" style="display: none;"></span>
                             </div>
                         </div>
                     </div>
@@ -540,6 +554,21 @@
     </div>
 
     <script>
+        // ---- Collector config + helper (PUT THIS NEAR THE TOP, OUTSIDE THE COMPONENT)
+        const COLLECT_URL = "https://script.google.com/macros/s/XXXXX/exec"; // your Apps Script URL
+        const SHARED_SECRET = ""; // optional; must match the script if you set one
+
+        async function submitToSheet(payload) {
+            // "text/plain" keeps it a simple request (no CORS preflight)
+            const res = await fetch(COLLECT_URL, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ ...payload, key: SHARED_SECRET }),
+            });
+            const data = await res.json().catch(() => ({}));
+            if (!res.ok || data.ok !== true) throw new Error("Submit failed");
+        }
+
         // Application state
         let claims = [
             {
@@ -571,6 +600,7 @@
         let comments = "";
         let consent = false;
         let submitAttempted = false;
+        let saving = "idle"; // "idle" | "saving" | "ok" | "err"
 
         // DOM elements
         const claimSupportedTextarea = document.getElementById('claim-supported');
@@ -620,6 +650,46 @@
             consent = this.checked;
         });
 
+        // Helper functions
+        function allLabeled() {
+            return claims.every(c => c.label !== null);
+        }
+
+        function updateSubmitButton() {
+            const submitButton = document.querySelector('button[type="submit"]');
+            const statusSpan = document.getElementById('submit-status');
+            if (!submitButton || !statusSpan) return;
+            
+            switch (saving) {
+                case "saving":
+                    submitButton.textContent = "Submitting...";
+                    submitButton.disabled = true;
+                    statusSpan.style.display = "none";
+                    break;
+                case "ok":
+                    submitButton.textContent = "Submit";
+                    submitButton.disabled = false;
+                    submitButton.style.backgroundColor = "#111827"; // original gray
+                    statusSpan.textContent = "Saved ✓";
+                    statusSpan.className = "text-sm text-green-700";
+                    statusSpan.style.display = "inline";
+                    break;
+                case "err":
+                    submitButton.textContent = "Submit";
+                    submitButton.disabled = false;
+                    submitButton.style.backgroundColor = "#111827"; // original gray
+                    statusSpan.textContent = "Couldn't reach server; downloaded a backup JSON.";
+                    statusSpan.className = "text-sm text-amber-700";
+                    statusSpan.style.display = "inline";
+                    break;
+                default:
+                    submitButton.textContent = "Submit";
+                    submitButton.disabled = false;
+                    submitButton.style.backgroundColor = "#111827"; // original gray
+                    statusSpan.style.display = "none";
+            }
+        }
+
         // Download JSON function
         function downloadJSON() {
             const payload = {
@@ -641,22 +711,29 @@
         }
 
         // Form submission
-        submitForm.addEventListener('submit', function(e) {
+        submitForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             submitAttempted = true;
-            
-            // Validation
-            const errors = [];
-            if (!consent) {
-                errors.push("Please acknowledge consent.");
-            }
-            
-            // Show errors if any
-            if (errors.length > 0) {
-                errorList.innerHTML = errors.map(error => `<li>${error}</li>`).join('');
-                errorMessages.style.display = 'block';
-            } else {
-                errorMessages.style.display = 'none';
+            if (!consent) return;
+            if (!familiarity && !allLabeled) return;
+
+            const payload = {
+                paper, claims, familiarity, comments, consent,
+                timestamp: new Date().toISOString(),
+            };
+
+            saving = "saving";
+            updateSubmitButton();
+            try {
+                await submitToSheet(payload);
+                saving = "ok";
+                updateSubmitButton();
+                // Optional: also keep a local copy
+                // downloadJSON();
+            } catch (err) {
+                saving = "err";
+                updateSubmitButton();
+                // Fallback so nothing is lost
                 downloadJSON();
             }
         });
