@@ -394,166 +394,14 @@
     </style>
 </head>
 <body>
-    <div class="min-h-screen bg-gray-50 text-gray-900">
-        <header class="border-b bg-white">
-            <div class="max-w-4xl mx-auto px-4 py-5 flex items-center gap-3">
-                <div class="h-9 w-9 rounded bg-purple-900 text-white grid place-items-center font-bold">UW</div>
-                <div>
-                    <h1 class="text-lg font-semibold">Scientific Claim Annotation</h1>
-                    <p class="text-sm text-gray-600">University of Washington</p>
-                </div>
-            </div>
-        </header>
-        
-        <main class="max-w-4xl mx-auto px-4 py-6">
-            <!-- Overview Section -->
-            <section class="mb-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-2">Overview</h2>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                    <p class="text-base leading-relaxed mb-2">Thank you for participating in our study!</p>
-                    <p class="text-base mb-2">We invite you to provide two scientific claims about your paper:</p>
-                    <ul class="list-disc list-inside text-base mb-2">
-                        <li><strong>Main supported claim</strong>: The central scientific claim that is uniquely supported by your paper's findings.</li>
-                        <li><strong>Relevant but unsupported claim</strong>: A scientific claim that is related to the topic of your paper, but which your paper does not support.</li>
-                    </ul>
-                    <p class="text-base mb-2"><i>Note</i>: Each claim should be around 20 words in length.</p>
-                    <p class="text-base mb-2">We draft both claims for you. Please feel free to edit, refine, or rewrite them as needed, or accept the draft claims if they fully satisfy the requirements.</p>
-                    <p class="text-sm text-gray-600 mt-2">A <u>scientific claim</u> is a atomic verifiable statements expressing a finding about one aspect of a scientific entity or process, which can be verified against a single source.</p>
-                </div>
-            </section>
-            
-            <!-- Paper Information Section -->
-            <section class="mb-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-2">Paper Information</h2>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                    <div class="flex flex-col sm:flex-row gap-2 py-1">
-                        <div class="sm:w-32 text-gray-600">Title</div>
-                        <div class="flex-1">
-                            <div class="font-medium" id="paper-title">QLoRA: Efficient Finetuning of Quantized LLMs</div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2 py-1">
-                        <div class="sm:w-32 text-gray-600">Publication Date</div>
-                        <div class="flex-1">
-                            <div id="paper-date">2023-05-23</div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2 py-1">
-                        <div class="sm:w-32 text-gray-600">Link</div>
-                        <div class="flex-1">
-                            <div><a class="text-blue-700 underline" href="https://www.semanticscholar.org/paper/32ac52069e562d4f900afee70bdca63f53461481" target="_blank">Semantic Scholar</a></div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2 py-1">
-                        <div class="sm:w-32 text-gray-600">Abstract</div>
-                        <div class="flex-1">
-                            <p class="text-sm text-gray-800 leading-relaxed" id="paper-abstract">We present QLoRA, an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB GPU while preserving full 16-bit finetuning task performance. QLoRA backpropagates gradients through a frozen, 4-bit quantized pretrained language model into Low Rank Adapters~(LoRA). Our best model family, which we name Guanaco, outperforms all previous openly released models on the Vicuna benchmark, reaching 99.3% of the performance level of ChatGPT while only requiring 24 hours of finetuning on a single GPU. QLoRA introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit NormalFloat (NF4), a new data type that is information theoretically optimal for normally distributed weights (b) double quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) paged optimziers to manage memory spikes. We use QLoRA to finetune more than 1,000 models, providing a detailed analysis of instruction following and chatbot performance across 8 instruction datasets, multiple model types (LLaMA, T5), and model scales that would be infeasible to run with regular finetuning (e.g. 33B and 65B parameter models). Our results show that QLoRA finetuning on a small high-quality dataset leads to state-of-the-art results, even when using smaller models than the previous SoTA. We provide a detailed analysis of chatbot performance based on both human and GPT-4 evaluations showing that GPT-4 evaluations are a cheap and reasonable alternative to human evaluation. Furthermore, we find that current chatbot benchmarks are not trustworthy to accurately evaluate the performance levels of chatbots. A lemon-picked analysis demonstrates where Guanaco fails compared to ChatGPT. We release all of our models and code, including CUDA kernels for 4-bit training.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Main Supported Claim Section -->
-            <section class="mb-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-2">Main supported claim</h2>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                    <div class="mb-6">
-                        <textarea
-                            id="claim-supported"
-                            class="w-full min-h-5rem rounded border p-2 text-gray-500 text-base"
-                            placeholder="Enter your main supported claim here..."
-                        >QLoRA enables full-performance finetuning of 65B-parameter language models on a single 48 GB GPU by using 4-bit quantization and low-rank adapters.</textarea>
-                        <div class="flex justify-end">
-                            <p class="text-xs text-gray-600 mt-2">
-                                draft claims are generated by GPT-4o
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-2 mt-2">
-                            <input
-                                id="accept-supported"
-                                type="checkbox"
-                                class="h-4 w-4"
-                            />
-                            <label for="accept-supported" class="text-sm text-gray-700">
-                                Accept draft claim
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Relevant but Unsupported Claim Section -->
-            <section class="mb-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-2">Relevant but unsupported claim</h2>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                    <div class="mb-6">
-                        <textarea
-                            id="claim-unsupported"
-                            class="w-full min-h-5rem rounded border p-2 text-gray-500 text-base"
-                            placeholder="Enter your relevant but unsupported claim here..."
-                        >QLoRA reduces the inference time of 65B-parameter language models compared to standard finetuning approaches.</textarea>
-                        <div class="flex justify-end">
-                            <p class="text-xs text-gray-600 mt-2">
-                                draft claims are generated by GPT-4o
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-2 mt-2">
-                            <input
-                                id="accept-unsupported"
-                                type="checkbox"
-                                class="h-4 w-4"
-                            />
-                            <label for="accept-unsupported" class="text-sm text-gray-700">
-                                Accept draft claim
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Comments Section -->
-            <section class="mb-6">
-                <h2 class="text-lg font-semibold text-gray-900 mb-2">Comments (optional)</h2>
-                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                    <textarea 
-                        id="comments" 
-                        placeholder="Any feedback or questions?" 
-                        class="w-full min-h-4rem rounded border p-2 text-base"
-                    ></textarea>
-                </div>
-            </section>
-            
-            <!-- Consent & Submit Section -->
-            <form id="submit-form" class="mb-10">
-                <section class="mb-6">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-2">Consent & submit</h2>
-                    <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
-                        <div class="space-y-3">
-                            <div class="flex items-start gap-3">
-                                <input id="consent" type="checkbox" class="mt-1 h-4 w-4" />
-                                <label for="consent" class="text-base">I understand my annotations will be used for research purposes and I will not submit any sensitive or confidential info.</label>
-                            </div>
-                            <div id="error-messages" class="border border-red-200 bg-red-50 text-red-800 rounded p-3 text-sm" style="display: none;">
-                                <ul class="list-disc pl-5" id="error-list"></ul>
-                            </div>
-                            <div class="flex gap-3 items-center">
-                                <button type="submit" class="px-4 py-2 rounded bg-gray-900 text-white hover:bg-black disabled:opacity-50 text-base">
-                                    Submit
-                                </button>
-                                <span id="submit-status" class="text-sm" style="display: none;"></span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </form>
-        </main>
-        
-        <footer class="border-t bg-white">
-            <div class="max-w-4xl mx-auto px-4 py-4 text-xs text-gray-600">© UW — Scientific Claim Annotation Study.</div>
-        </footer>
-    </div>
+    <div id="root"></div>
 
-    <script>
+    <!-- React and Babel for JSX support -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" data-presets="typescript,react">
         // ---- Collector config + helper (PUT THIS NEAR THE TOP, OUTSIDE THE COMPONENT)
         const COLLECT_URL = "https://script.google.com/macros/s/AKfycbxGtX2N3-6PhpWg9V9ITQrgwQdXAS7ZnlXUfTzHFSfMCVnLuy8b_uepwcvLl2Cpo_yZ9w/exec"; // your Apps Script URL
         const SHARED_SECRET = "fw84"; // optional; must match the script if you set one
@@ -569,138 +417,8 @@
             if (!res.ok || data.ok !== true) throw new Error("Submit failed");
         }
 
-        // Application state
-        let claims = [
-            {
-                id: "c1",
-                source: "synthetic",
-                text: "QLoRA enables full-performance finetuning of 65B-parameter language models on a single 48 GB GPU by using 4-bit quantization and low-rank adapters.",
-                label: "support",
-                status: null,
-                editedText: null
-            },
-            {
-                id: "c2",
-                source: "synthetic",
-                text: "QLoRA reduces the inference time of 65B-parameter language models compared to standard finetuning approaches.",
-                label: "refute",
-                status: null,
-                editedText: null
-            }
-        ];
-
-        let paper = {
-            title: "QLoRA: Efficient Finetuning of Quantized LLMs",
-            publicationDate: "2023-05-23",
-            link: "https://www.semanticscholar.org/paper/32ac52069e562d4f900afee70bdca63f53461481",
-            abstract: "We present QLoRA, an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB GPU while preserving full 16-bit finetuning task performance. QLoRA backpropagates gradients through a frozen, 4-bit quantized pretrained language model into Low Rank Adapters~(LoRA). Our best model family, which we name Guanaco, outperforms all previous openly released models on the Vicuna benchmark, reaching 99.3% of the performance level of ChatGPT while only requiring 24 hours of finetuning on a single GPU. QLoRA introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit NormalFloat (NF4), a new data type that is information theoretically optimal for normally distributed weights (b) double quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) paged optimziers to manage memory spikes. We use QLoRA to finetune more than 1,000 models, providing a detailed analysis of instruction following and chatbot performance across 8 instruction datasets, multiple model types (LLaMA, T5), and model scales that would be infeasible to run with regular finetuning (e.g. 33B and 65B parameter models). Our results show that QLoRA finetuning on a small high-quality dataset leads to state-of-the-art results, even when using smaller models than the previous SoTA. We provide a detailed analysis of chatbot performance based on both human and GPT-4 evaluations showing that GPT-4 evaluations are a cheap and reasonable alternative to human evaluation. Furthermore, we find that current chatbot benchmarks are not trustworthy to accurately evaluate the performance levels of chatbots. A lemon-picked analysis demonstrates where Guanaco fails compared to ChatGPT. We release all of our models and code, including CUDA kernels for 4-bit training."
-        };
-
-        let familiarity = false;
-        let comments = "";
-        let consent = false;
-        let submitAttempted = false;
-        let saving = "idle"; // "idle" | "saving" | "ok" | "err"
-
-        // DOM elements
-        const claimSupportedTextarea = document.getElementById('claim-supported');
-        const claimUnsupportedTextarea = document.getElementById('claim-unsupported');
-        const acceptSupportedCheckbox = document.getElementById('accept-supported');
-        const acceptUnsupportedCheckbox = document.getElementById('accept-unsupported');
-        const commentsTextarea = document.getElementById('comments');
-        const consentCheckbox = document.getElementById('consent');
-        const submitForm = document.getElementById('submit-form');
-        const errorMessages = document.getElementById('error-messages');
-        const errorList = document.getElementById('error-list');
-
-        // Event listeners
-        claimSupportedTextarea.addEventListener('input', function() {
-            claims[0].editedText = this.value;
-            claims[0].status = "edited";
-        });
-
-        claimUnsupportedTextarea.addEventListener('input', function() {
-            claims[1].editedText = this.value;
-            claims[1].status = "edited";
-        });
-
-        acceptSupportedCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                claims[0].status = "accepted";
-                claims[0].editedText = undefined;
-            } else {
-                claims[0].status = null;
-            }
-        });
-
-        acceptUnsupportedCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                claims[1].status = "accepted";
-                claims[1].editedText = undefined;
-            } else {
-                claims[1].status = null;
-            }
-        });
-
-        commentsTextarea.addEventListener('input', function() {
-            comments = this.value;
-        });
-
-        consentCheckbox.addEventListener('change', function() {
-            consent = this.checked;
-        });
-
-        // Helper functions
-        function allLabeled() {
-            return claims.every(c => c.label !== null);
-        }
-
-        function updateSubmitButton() {
-            const submitButton = document.querySelector('button[type="submit"]');
-            const statusSpan = document.getElementById('submit-status');
-            if (!submitButton || !statusSpan) return;
-            
-            switch (saving) {
-                case "saving":
-                    submitButton.textContent = "Submitting...";
-                    submitButton.disabled = true;
-                    statusSpan.style.display = "none";
-                    break;
-                case "ok":
-                    submitButton.textContent = "Submit";
-                    submitButton.disabled = false;
-                    submitButton.style.backgroundColor = "#111827"; // original gray
-                    statusSpan.textContent = "Saved ✓";
-                    statusSpan.className = "text-sm text-green-700";
-                    statusSpan.style.display = "inline";
-                    break;
-                case "err":
-                    submitButton.textContent = "Submit";
-                    submitButton.disabled = false;
-                    submitButton.style.backgroundColor = "#111827"; // original gray
-                    statusSpan.textContent = "Couldn't reach server; downloaded a backup JSON.";
-                    statusSpan.className = "text-sm text-amber-700";
-                    statusSpan.style.display = "inline";
-                    break;
-                default:
-                    submitButton.textContent = "Submit";
-                    submitButton.disabled = false;
-                    submitButton.style.backgroundColor = "#111827"; // original gray
-                    statusSpan.style.display = "none";
-            }
-        }
-
         // Download JSON function
-        function downloadJSON() {
-            const payload = {
-                paper,
-                claims,
-                familiarity,
-                comments,
-                consent,
-                timestamp: new Date().toISOString()
-            };
-            
+        function downloadJSON(payload) {
             const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
@@ -710,37 +428,286 @@
             URL.revokeObjectURL(url);
         }
 
-        // Form submission
-        submitForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            submitAttempted = true;
-            if (!consent) return;
-            if (!familiarity && !allLabeled) return;
+        // 1) A small registry of content keyed by id
+        const CONTENT = {
+            qlora: {
+                paper: {
+                    title: "QLoRA: Efficient Finetuning of Quantized LLMs",
+                    publicationDate: "2023-05-23",
+                    url: "https://www.semanticscholar.org/paper/32ac52069e562d4f900afee70bdca63f53461481",
+                    abstract: "We present QLoRA, an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB GPU while preserving full 16-bit finetuning task performance. QLoRA backpropagates gradients through a frozen, 4-bit quantized pretrained language model into Low Rank Adapters~(LoRA). Our best model family, which we name Guanaco, outperforms all previous openly released models on the Vicuna benchmark, reaching 99.3% of the performance level of ChatGPT while only requiring 24 hours of finetuning on a single GPU. QLoRA introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit NormalFloat (NF4), a new data type that is information theoretically optimal for normally distributed weights (b) double quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) paged optimziers to manage memory spikes. We use QLoRA to finetune more than 1,000 models, providing a detailed analysis of instruction following and chatbot performance across 8 instruction datasets, multiple model types (LLaMA, T5), and model scales that would be infeasible to run with regular finetuning (e.g. 33B and 65B parameter models). Our results show that QLoRA finetuning on a small high-quality dataset leads to state-of-the-art results, even when using smaller models than the previous SoTA. We provide a detailed analysis of chatbot performance based on both human and GPT-4 evaluations showing that GPT-4 evaluations are a cheap and reasonable alternative to human evaluation. Furthermore, we find that current chatbot benchmarks are not trustworthy to accurately evaluate the performance levels of chatbots. A lemon-picked analysis demonstrates where Guanaco fails compared to ChatGPT. We release all of our models and code, including CUDA kernels for 4-bit training."
+                },
+                claims: [
+                    { id: "c1", source: "synthetic", text: "QLoRA enables full-performance finetuning of 65B-parameter language models on a single 48 GB GPU by using 4-bit quantization and low-rank adapters.", label: "support", status: null },
+                    { id: "c2", source: "synthetic", text: "QLoRA reduces the inference time of 65B-parameter language models compared to standard finetuning approaches.", label: "refute", status: null }
+                ]
+            },
+            t5: {
+                paper: {
+                    title: "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+                    publicationDate: "2020-10-01",
+                    url: "https://arxiv.org/abs/1910.10683",
+                    abstract: "Transfer learning, where a model is first pre-trained on a data-rich task before being fine-tuned on a downstream task, has emerged as a powerful technique in natural language processing (NLP). The effectiveness of transfer learning has given rise to a diversity of approaches, methodology, and practice. In this paper, we explore the landscape of transfer learning techniques for NLP by introducing a unified framework that converts every language problem into a text-to-text format. Our systematic study compares pre-training objectives, architectures, unlabeled datasets, transfer approaches, and other factors on dozens of language understanding tasks. By combining the insights from our exploration with scale and our new \"Colossal Clean Crawled Corpus\", we achieve state-of-the-art results on many benchmarks covering summarization, question answering, text classification, and more. To facilitate future work on transfer learning for NLP, we release our dataset, pre-trained models, and code."
+                },
+                claims: [
+                    { id: "c1", source: "synthetic", text: "T5 reframes all NLP tasks as text-to-text problems using a unified transformer architecture.", label: "support", status: null },
+                    { id: "c2", source: "synthetic", text: "T5 requires specialized hardware for training and inference compared to traditional NLP models.", label: "refute", status: null }
+                ]
+            }
+        };
 
-            const payload = {
-                paper, claims, familiarity, comments, consent,
-                timestamp: new Date().toISOString(),
+        // 2) Helpers to read the current id and content
+        function getIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("id") || "qlora"; // default if missing
+        }
+        function getContentById(id) {
+            return CONTENT[id] || null;
+        }
+
+        // ClaimAnnotationApp React component
+        function ClaimAnnotationApp({ initialPaper, initialClaims }) {
+            const [paper] = React.useState(initialPaper);
+            const [claims, setClaims] = React.useState(initialClaims);
+            const [comments, setComments] = React.useState("");
+            const [consent, setConsent] = React.useState(false);
+            const [saving, setSaving] = React.useState("idle");
+
+            const handleClaimChange = (index, value) => {
+                const newClaims = [...claims];
+                newClaims[index] = { ...newClaims[index], editedText: value, status: "edited" };
+                setClaims(newClaims);
             };
 
-            saving = "saving";
-            updateSubmitButton();
-            try {
-                await submitToSheet(payload);
-                saving = "ok";
-                updateSubmitButton();
-                // Optional: also keep a local copy
-                // downloadJSON();
-            } catch (err) {
-                saving = "err";
-                updateSubmitButton();
-                // Fallback so nothing is lost
-                downloadJSON();
-            }
-        });
+            const handleAcceptClaim = (index, checked) => {
+                const newClaims = [...claims];
+                if (checked) {
+                    newClaims[index] = { ...newClaims[index], status: "accepted", editedText: undefined };
+                } else {
+                    newClaims[index] = { ...newClaims[index], status: null };
+                }
+                setClaims(newClaims);
+            };
 
-        // Initialize form with default values
-        claimSupportedTextarea.value = claims[0].text;
-        claimUnsupportedTextarea.value = claims[1].text;
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                if (!consent) return;
+
+                const payload = {
+                    paper, claims, comments, consent,
+                    timestamp: new Date().toISOString(),
+                };
+
+                setSaving("saving");
+                try {
+                    await submitToSheet(payload);
+                    setSaving("ok");
+                } catch (err) {
+                    setSaving("err");
+                    downloadJSON(payload);
+                }
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-50 text-gray-900">
+                    <header className="border-b bg-white">
+                        <div className="max-w-4xl mx-auto px-4 py-5 flex items-center gap-3">
+                            <div className="h-9 w-9 rounded bg-purple-900 text-white grid place-items-center font-bold">UW</div>
+                            <div>
+                                <h1 className="text-lg font-semibold">Scientific Claim Annotation</h1>
+                                <p className="text-sm text-gray-600">University of Washington</p>
+                            </div>
+                        </div>
+                    </header>
+                    
+                    <main className="max-w-4xl mx-auto px-4 py-6">
+                        {/* Overview Section */}
+                        <section className="mb-6">
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2">Overview</h2>
+                            <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                                <p className="text-base leading-relaxed mb-2">Thank you for participating in our study!</p>
+                                <p className="text-base mb-2">We invite you to provide two scientific claims about your paper:</p>
+                                <ul className="list-disc list-inside text-base mb-2">
+                                    <li><strong>Main supported claim</strong>: The central scientific claim that is uniquely supported by your paper's findings.</li>
+                                    <li><strong>Relevant but unsupported claim</strong>: A scientific claim that is related to the topic of your paper, but which your paper does not support.</li>
+                                </ul>
+                                <p className="text-base mb-2"><i>Note</i>: Each claim should be around 20 words in length.</p>
+                                <p className="text-base mb-2">We draft both claims for you. Please feel free to edit, refine, or rewrite them as needed, or accept the draft claims if they fully satisfy the requirements.</p>
+                                <p className="text-sm text-gray-600 mt-2">A <u>scientific claim</u> is a atomic verifiable statements expressing a finding about one aspect of a scientific entity or process, which can be verified against a single source.</p>
+                            </div>
+                        </section>
+                        
+                        {/* Paper Information Section */}
+                        <section className="mb-6">
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2">Paper Information</h2>
+                            <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                                <div className="flex flex-col sm:flex-row gap-2 py-1">
+                                    <div className="sm:w-32 text-gray-600">Title</div>
+                                    <div className="flex-1">
+                                        <div className="font-medium">{paper.title}</div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-2 py-1">
+                                    <div className="sm:w-32 text-gray-600">Publication Date</div>
+                                    <div className="flex-1">
+                                        <div>{paper.publicationDate}</div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-2 py-1">
+                                    <div className="sm:w-32 text-gray-600">Link</div>
+                                    <div className="flex-1">
+                                        <div><a className="text-blue-700 underline" href={paper.url} target="_blank">Semantic Scholar</a></div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col sm:flex-row gap-2 py-1">
+                                    <div className="sm:w-32 text-gray-600">Abstract</div>
+                                    <div className="flex-1">
+                                        <p className="text-sm text-gray-800 leading-relaxed">{paper.abstract}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        {/* Main Supported Claim Section */}
+                        <section className="mb-6">
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2">Main supported claim</h2>
+                            <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                                <div className="mb-6">
+                                    <textarea
+                                        className="w-full min-h-5rem rounded border p-2 text-gray-500 text-base"
+                                        placeholder="Enter your main supported claim here..."
+                                        value={claims[0]?.editedText || claims[0]?.text || ""}
+                                        onChange={(e) => handleClaimChange(0, e.target.value)}
+                                    />
+                                    <div className="flex justify-end">
+                                        <p className="text-xs text-gray-600 mt-2">
+                                            draft claims are generated by GPT-4o
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-2 mt-2">
+                                        <input
+                                            type="checkbox"
+                                            className="h-4 w-4"
+                                            checked={claims[0]?.status === "accepted"}
+                                            onChange={(e) => handleAcceptClaim(0, e.target.checked)}
+                                        />
+                                        <label className="text-sm text-gray-700">
+                                            Accept draft claim
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        {/* Relevant but Unsupported Claim Section */}
+                        <section className="mb-6">
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2">Relevant but unsupported claim</h2>
+                            <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                                <div className="mb-6">
+                                    <textarea
+                                        className="w-full min-h-5rem rounded border p-2 text-gray-500 text-base"
+                                        placeholder="Enter your relevant but unsupported claim here..."
+                                        value={claims[1]?.editedText || claims[1]?.text || ""}
+                                        onChange={(e) => handleClaimChange(1, e.target.value)}
+                                    />
+                                    <div className="flex justify-end">
+                                        <p className="text-xs text-gray-600 mt-2">
+                                            draft claims are generated by GPT-4o
+                                        </p>
+                                    </div>
+                                    <div className="flex items-center gap-2 mt-2">
+                                        <input
+                                            type="checkbox"
+                                            className="h-4 w-4"
+                                            checked={claims[1]?.status === "accepted"}
+                                            onChange={(e) => handleAcceptClaim(1, e.target.checked)}
+                                        />
+                                        <label className="text-sm text-gray-700">
+                                            Accept draft claim
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        {/* Comments Section */}
+                        <section className="mb-6">
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2">Comments (optional)</h2>
+                            <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                                <textarea 
+                                    placeholder="Any feedback or questions?" 
+                                    className="w-full min-h-4rem rounded border p-2 text-base"
+                                    value={comments}
+                                    onChange={(e) => setComments(e.target.value)}
+                                />
+                            </div>
+                        </section>
+                        
+                        {/* Consent & Submit Section */}
+                        <form onSubmit={handleSubmit} className="mb-10">
+                            <section className="mb-6">
+                                <h2 className="text-lg font-semibold text-gray-900 mb-2">Consent & Submit</h2>
+                                <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                                    <div className="space-y-3">
+                                        <div className="flex items-start gap-3">
+                                            <input 
+                                                type="checkbox" 
+                                                className="mt-1 h-4 w-4" 
+                                                checked={consent}
+                                                onChange={(e) => setConsent(e.target.checked)}
+                                            />
+                                            <label className="text-base">I understand my annotations will be used for research purposes and I will not submit any sensitive or confidential information. I will be acknowledged for my contributions.</label>
+                                        </div>
+                                        <div className="flex gap-3 items-center">
+                                            <button 
+                                                type="submit" 
+                                                className="px-4 py-2 rounded bg-gray-900 text-white hover:bg-black disabled:opacity-50 text-base"
+                                                disabled={saving === "saving"}
+                                            >
+                                                {saving === "saving" ? "Submitting..." : "Submit"}
+                                            </button>
+                                            {saving === "ok" && <span className="text-sm text-green-700">Saved ✓</span>}
+                                            {saving === "err" && <span className="text-sm text-amber-700">Couldn't reach server; downloaded a backup JSON.</span>}
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </form>
+                    </main>
+                    
+                    <footer className="border-t bg-white">
+                        <div className="max-w-4xl mx-auto px-4 py-4 text-xs text-gray-600">© UW — Scientific Claim Annotation Study.</div>
+                    </footer>
+                </div>
+            );
+        }
+
+        // 3) A small wrapper that reacts to URL changes (back/forward)
+        function AppRouter() {
+            const [id, setId] = React.useState(getIdFromURL());
+            React.useEffect(() => {
+                const onPop = () => setId(getIdFromURL());
+                window.addEventListener("popstate", onPop);
+                return () => window.removeEventListener("popstate", onPop);
+            }, []);
+
+            const cfg = getContentById(id);
+            if (!cfg) {
+                return (
+                    <div className="max-w-4xl mx-auto px-4 py-10">
+                        <div className="border rounded-lg p-4 bg-yellow-50 border-yellow-200 text-yellow-900">
+                            Unknown id: <b>{id}</b>. Try <a className="underline" href="?id=qlora">?id=qlora</a> or <a className="underline" href="?id=t5">?id=t5</a>.
+                        </div>
+                    </div>
+                );
+            }
+            return <ClaimAnnotationApp initialPaper={cfg.paper} initialClaims={cfg.claims} />;
+        }
+
+        // 4) Mount the router (instead of mounting ClaimAnnotationApp directly)
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<AppRouter />);
     </script>
+
 </body>
 </html>
