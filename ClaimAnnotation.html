@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Claim Annotation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f9fafb;
+            color: #111827;
+            line-height: 1.6;
+        }
+        
+        .min-h-screen {
+            min-height: 100vh;
+        }
+        
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+        
+        .text-gray-900 {
+            color: #111827;
+        }
+        
+        .text-gray-600 {
+            color: #4b5563;
+        }
+        
+        .text-gray-700 {
+            color: #374151;
+        }
+        
+        .text-gray-800 {
+            color: #1f2937;
+        }
+        
+        .text-blue-700 {
+            color: #1d4ed8;
+        }
+        
+        .text-red-800 {
+            color: #991b1b;
+        }
+        
+        .bg-white {
+            background-color: #ffffff;
+        }
+        
+        .bg-gray-100 {
+            background-color: #f3f4f6;
+        }
+        
+        .bg-red-50 {
+            background-color: #fef2f2;
+        }
+        
+        .bg-purple-900 {
+            background-color: #581c87;
+        }
+        
+        .bg-gray-900 {
+            background-color: #111827;
+        }
+        
+        .border {
+            border: 1px solid #e5e7eb;
+        }
+        
+        .border-b {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .border-t {
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .border-gray-200 {
+            border-color: #e5e7eb;
+        }
+        
+        .border-red-200 {
+            border-color: #fecaca;
+        }
+        
+        .rounded {
+            border-radius: 0.375rem;
+        }
+        
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+        
+        .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        .max-w-4xl {
+            max-width: 56rem;
+        }
+        
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        .py-5 {
+            padding-top: 1.25rem;
+            padding-bottom: 1.25rem;
+        }
+        
+        .py-6 {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        
+        .px-2 {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+        }
+        
+        .p-2 {
+            padding: 0.5rem;
+        }
+        
+        .p-3 {
+            padding: 0.75rem;
+        }
+        
+        .p-4 {
+            padding: 1rem;
+        }
+        
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .mb-10 {
+            margin-bottom: 2.5rem;
+        }
+        
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+        
+        .mt-3 {
+            margin-top: 0.75rem;
+        }
+        
+        .gap-2 {
+            gap: 0.5rem;
+        }
+        
+        .gap-3 {
+            gap: 0.75rem;
+        }
+        
+        .h-9 {
+            height: 2.25rem;
+        }
+        
+        .w-9 {
+            width: 2.25rem;
+        }
+        
+        .h-4 {
+            height: 1rem;
+        }
+        
+        .w-4 {
+            width: 1rem;
+        }
+        
+        .min-h-5rem {
+            min-height: 5rem;
+        }
+        
+        .min-h-4rem {
+            min-height: 4rem;
+        }
+        
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+        
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+        
+        .text-xs {
+            font-size: 0.75rem;
+            line-height: 1rem;
+        }
+        
+        .text-base {
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+        
+        .font-semibold {
+            font-weight: 600;
+        }
+        
+        .font-medium {
+            font-weight: 500;
+        }
+        
+        .font-bold {
+            font-weight: 700;
+        }
+        
+        .leading-relaxed {
+            line-height: 1.625;
+        }
+        
+        .flex {
+            display: flex;
+        }
+        
+        .flex-col {
+            flex-direction: column;
+        }
+        
+        .items-center {
+            align-items: center;
+        }
+        
+        .items-start {
+            align-items: flex-start;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .justify-end {
+            justify-content: flex-end;
+        }
+        
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+        
+        .grid {
+            display: grid;
+        }
+        
+        .place-items-center {
+            place-items: center;
+        }
+        
+        .space-y-3 > * + * {
+            margin-top: 0.75rem;
+        }
+        
+        .list-disc {
+            list-style-type: disc;
+        }
+        
+        .list-inside {
+            list-style-position: inside;
+        }
+        
+        .pl-5 {
+            padding-left: 1.25rem;
+        }
+        
+        .underline {
+            text-decoration: underline;
+        }
+        
+        .hover\:bg-gray-50:hover {
+            background-color: #f9fafb;
+        }
+        
+        .hover\:bg-black:hover {
+            background-color: #000000;
+        }
+        
+        .hover\:bg-gray-50:hover {
+            background-color: #f9fafb;
+        }
+        
+        .disabled\:opacity-50:disabled {
+            opacity: 0.5;
+        }
+        
+        .opacity-50 {
+            opacity: 0.5;
+        }
+        
+        .text-white {
+            color: #ffffff;
+        }
+        
+        .text-gray-500 {
+            color: #6b7280;
+        }
+        
+        .w-full {
+            width: 100%;
+        }
+        
+        .inline-flex {
+            display: inline-flex;
+        }
+        
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+        
+        button:disabled {
+            cursor: not-allowed;
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            cursor: pointer;
+        }
+        
+        textarea {
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (min-width: 640px) {
+            .sm\:flex-row {
+                flex-direction: row;
+            }
+            .sm\:w-32 {
+                width: 8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen bg-gray-50 text-gray-900">
+        <header class="border-b bg-white">
+            <div class="max-w-4xl mx-auto px-4 py-5 flex items-center gap-3">
+                <div class="h-9 w-9 rounded bg-purple-900 text-white grid place-items-center font-bold">UW</div>
+                <div>
+                    <h1 class="text-lg font-semibold">Author Claim Annotation</h1>
+                    <p class="text-sm text-gray-600">University of Washington Study</p>
+                </div>
+            </div>
+        </header>
+        
+        <main class="max-w-4xl mx-auto px-4 py-6">
+            <!-- Overview Section -->
+            <section class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Overview</h2>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                    <p class="text-base leading-relaxed mb-2">Thank you for participating in our study!</p>
+                    <p class="text-base mb-2">We invite you to provide two scientific claims about your paper:</p>
+                    <ul class="list-disc list-inside text-base mb-2">
+                        <li><strong>Main supported claim</strong>: The central scientific claim that is uniquely supported by your paper's findings.</li>
+                        <li><strong>Relevant but unsupported claim</strong>: A scientific claim that is related to the topic of your paper, but which your paper does not support.</li>
+                    </ul>
+                    <p class="text-base mb-2"><i>Note</i>: Each claim should be around 20 words in length.</p>
+                    <p class="text-base mb-2">We draft both claims for you. Please feel free to edit, refine, or rewrite them as needed, or accept the draft claims if they fully satisfy the requirements.</p>
+                    <p class="text-sm text-gray-600 mt-2">A <u>scientific claim</u> is a atomic verifiable statements expressing a finding about one aspect of a scientific entity or process, which can be verified against a single source.</p>
+                </div>
+            </section>
+            
+            <!-- Paper Information Section -->
+            <section class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Paper Information</h2>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                    <div class="flex flex-col sm:flex-row gap-2 py-1">
+                        <div class="sm:w-32 text-gray-600">Title</div>
+                        <div class="flex-1">
+                            <div class="font-medium" id="paper-title">QLoRA: Efficient Finetuning of Quantized LLMs</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 py-1">
+                        <div class="sm:w-32 text-gray-600">Publication Date</div>
+                        <div class="flex-1">
+                            <div id="paper-date">2023-05-23</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 py-1">
+                        <div class="sm:w-32 text-gray-600">Link</div>
+                        <div class="flex-1">
+                            <div><a class="text-blue-700 underline" href="https://www.semanticscholar.org/paper/32ac52069e562d4f900afee70bdca63f53461481" target="_blank">Semantic Scholar</a></div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2 py-1">
+                        <div class="sm:w-32 text-gray-600">Abstract</div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-800 leading-relaxed" id="paper-abstract">We present QLoRA, an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB GPU while preserving full 16-bit finetuning task performance. QLoRA backpropagates gradients through a frozen, 4-bit quantized pretrained language model into Low Rank Adapters~(LoRA). Our best model family, which we name Guanaco, outperforms all previous openly released models on the Vicuna benchmark, reaching 99.3% of the performance level of ChatGPT while only requiring 24 hours of finetuning on a single GPU. QLoRA introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit NormalFloat (NF4), a new data type that is information theoretically optimal for normally distributed weights (b) double quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) paged optimziers to manage memory spikes. We use QLoRA to finetune more than 1,000 models, providing a detailed analysis of instruction following and chatbot performance across 8 instruction datasets, multiple model types (LLaMA, T5), and model scales that would be infeasible to run with regular finetuning (e.g. 33B and 65B parameter models). Our results show that QLoRA finetuning on a small high-quality dataset leads to state-of-the-art results, even when using smaller models than the previous SoTA. We provide a detailed analysis of chatbot performance based on both human and GPT-4 evaluations showing that GPT-4 evaluations are a cheap and reasonable alternative to human evaluation. Furthermore, we find that current chatbot benchmarks are not trustworthy to accurately evaluate the performance levels of chatbots. A lemon-picked analysis demonstrates where Guanaco fails compared to ChatGPT. We release all of our models and code, including CUDA kernels for 4-bit training.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Main Supported Claim Section -->
+            <section class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Main supported claim</h2>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                    <div class="mb-6">
+                        <textarea
+                            id="claim-supported"
+                            class="w-full min-h-5rem rounded border p-2 text-gray-500"
+                            placeholder="Enter your main supported claim here..."
+                        >QLoRA enables full-performance finetuning of 65B-parameter language models on a single 48 GB GPU by using 4-bit quantization and low-rank adapters.</textarea>
+                        <div class="flex justify-end">
+                            <p class="text-xs text-gray-600 mt-2">
+                                draft claims are generated by GPT-4o
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <input
+                                id="accept-supported"
+                                type="checkbox"
+                                class="h-4 w-4"
+                            />
+                            <label for="accept-supported" class="text-sm text-gray-700">
+                                Accept draft claim
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Relevant but Unsupported Claim Section -->
+            <section class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Relevant but unsupported claim</h2>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                    <div class="mb-6">
+                        <textarea
+                            id="claim-unsupported"
+                            class="w-full min-h-5rem rounded border p-2 text-gray-500"
+                            placeholder="Enter your relevant but unsupported claim here..."
+                        >QLoRA reduces the inference time of 65B-parameter language models compared to standard finetuning approaches.</textarea>
+                        <div class="flex justify-end">
+                            <p class="text-xs text-gray-600 mt-2">
+                                draft claims are generated by GPT-4o
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <input
+                                id="accept-unsupported"
+                                type="checkbox"
+                                class="h-4 w-4"
+                            />
+                            <label for="accept-unsupported" class="text-sm text-gray-700">
+                                Accept draft claim
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Comments Section -->
+            <section class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Comments (optional)</h2>
+                <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                    <textarea 
+                        id="comments" 
+                        placeholder="Any feedback or questions?" 
+                        class="w-full min-h-4rem rounded border p-2"
+                    ></textarea>
+                </div>
+            </section>
+            
+            <!-- Consent & Submit Section -->
+            <form id="submit-form" class="mb-10">
+                <section class="mb-6">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-2">Consent & submit</h2>
+                    <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3">
+                                <input id="consent" type="checkbox" class="mt-1 h-4 w-4" />
+                                <label for="consent" class="text-sm">I understand my annotations will be used for research purposes and I will not submit any sensitive or confidential info.</label>
+                            </div>
+                            <div id="error-messages" class="border border-red-200 bg-red-50 text-red-800 rounded p-3 text-sm" style="display: none;">
+                                <ul class="list-disc pl-5" id="error-list"></ul>
+                            </div>
+                            <div class="flex gap-3">
+                                <button type="submit" class="px-4 py-2 rounded bg-gray-900 text-white hover:bg-black disabled:opacity-50">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </main>
+        
+        <footer class="border-t bg-white">
+            <div class="max-w-4xl mx-auto px-4 py-4 text-xs text-gray-600">© UW — Scientific Claim Annotation Study.</div>
+        </footer>
+    </div>
+
+    <script>
+        // Application state
+        let claims = [
+            {
+                id: "c1",
+                source: "synthetic",
+                text: "QLoRA enables full-performance finetuning of 65B-parameter language models on a single 48 GB GPU by using 4-bit quantization and low-rank adapters.",
+                label: "support",
+                status: null,
+                editedText: null
+            },
+            {
+                id: "c2",
+                source: "synthetic",
+                text: "QLoRA reduces the inference time of 65B-parameter language models compared to standard finetuning approaches.",
+                label: "refute",
+                status: null,
+                editedText: null
+            }
+        ];
+
+        let paper = {
+            title: "QLoRA: Efficient Finetuning of Quantized LLMs",
+            publicationDate: "2023-05-23",
+            link: "https://www.semanticscholar.org/paper/32ac52069e562d4f900afee70bdca63f53461481",
+            abstract: "We present QLoRA, an efficient finetuning approach that reduces memory usage enough to finetune a 65B parameter model on a single 48GB GPU while preserving full 16-bit finetuning task performance. QLoRA backpropagates gradients through a frozen, 4-bit quantized pretrained language model into Low Rank Adapters~(LoRA). Our best model family, which we name Guanaco, outperforms all previous openly released models on the Vicuna benchmark, reaching 99.3% of the performance level of ChatGPT while only requiring 24 hours of finetuning on a single GPU. QLoRA introduces a number of innovations to save memory without sacrificing performance: (a) 4-bit NormalFloat (NF4), a new data type that is information theoretically optimal for normally distributed weights (b) double quantization to reduce the average memory footprint by quantizing the quantization constants, and (c) paged optimziers to manage memory spikes. We use QLoRA to finetune more than 1,000 models, providing a detailed analysis of instruction following and chatbot performance across 8 instruction datasets, multiple model types (LLaMA, T5), and model scales that would be infeasible to run with regular finetuning (e.g. 33B and 65B parameter models). Our results show that QLoRA finetuning on a small high-quality dataset leads to state-of-the-art results, even when using smaller models than the previous SoTA. We provide a detailed analysis of chatbot performance based on both human and GPT-4 evaluations showing that GPT-4 evaluations are a cheap and reasonable alternative to human evaluation. Furthermore, we find that current chatbot benchmarks are not trustworthy to accurately evaluate the performance levels of chatbots. A lemon-picked analysis demonstrates where Guanaco fails compared to ChatGPT. We release all of our models and code, including CUDA kernels for 4-bit training."
+        };
+
+        let familiarity = false;
+        let comments = "";
+        let consent = false;
+        let submitAttempted = false;
+
+        // DOM elements
+        const claimSupportedTextarea = document.getElementById('claim-supported');
+        const claimUnsupportedTextarea = document.getElementById('claim-unsupported');
+        const acceptSupportedCheckbox = document.getElementById('accept-supported');
+        const acceptUnsupportedCheckbox = document.getElementById('accept-unsupported');
+        const commentsTextarea = document.getElementById('comments');
+        const consentCheckbox = document.getElementById('consent');
+        const submitForm = document.getElementById('submit-form');
+        const errorMessages = document.getElementById('error-messages');
+        const errorList = document.getElementById('error-list');
+
+        // Event listeners
+        claimSupportedTextarea.addEventListener('input', function() {
+            claims[0].editedText = this.value;
+            claims[0].status = "edited";
+        });
+
+        claimUnsupportedTextarea.addEventListener('input', function() {
+            claims[1].editedText = this.value;
+            claims[1].status = "edited";
+        });
+
+        acceptSupportedCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                claims[0].status = "accepted";
+                claims[0].editedText = undefined;
+            } else {
+                claims[0].status = null;
+            }
+        });
+
+        acceptUnsupportedCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                claims[1].status = "accepted";
+                claims[1].editedText = undefined;
+            } else {
+                claims[1].status = null;
+            }
+        });
+
+        commentsTextarea.addEventListener('input', function() {
+            comments = this.value;
+        });
+
+        consentCheckbox.addEventListener('change', function() {
+            consent = this.checked;
+        });
+
+        // Download JSON function
+        function downloadJSON() {
+            const payload = {
+                paper,
+                claims,
+                familiarity,
+                comments,
+                consent,
+                timestamp: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "claim-annotations.json";
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Form submission
+        submitForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitAttempted = true;
+            
+            // Validation
+            const errors = [];
+            if (!consent) {
+                errors.push("Please acknowledge consent.");
+            }
+            
+            // Show errors if any
+            if (errors.length > 0) {
+                errorList.innerHTML = errors.map(error => `<li>${error}</li>`).join('');
+                errorMessages.style.display = 'block';
+            } else {
+                errorMessages.style.display = 'none';
+                downloadJSON();
+            }
+        });
+
+        // Initialize form with default values
+        claimSupportedTextarea.value = claims[0].text;
+        claimUnsupportedTextarea.value = claims[1].text;
+    </script>
+</body>
+</html>
