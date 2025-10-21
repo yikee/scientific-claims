@@ -1680,20 +1680,22 @@
                                         <input
                                             type="radio"
                                             name="mainSupportedDraft"
-                                            className="h-4 w-4 mr-6"
+                                            className="h-4 w-4"
                                             checked={draftAccepted.mainSupported === true}
                                             onChange={() => handleDraftSelection('mainSupported', true)}
                                         />
+                                        <div className="w-16"></div>
                                         <span className="text-base text-gray-700">Yes</span>
                                     </label>
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
                                             name="mainSupportedDraft"
-                                            className="h-4 w-4 mr-6"
+                                            className="h-4 w-4"
                                             checked={draftAccepted.mainSupported === false}
                                             onChange={() => handleDraftSelection('mainSupported', false)}
                                         />
+                                        <div className="w-16"></div>
                                         <span className="text-base text-gray-700">No</span>
                                     </label>
                                 </div>
@@ -1739,20 +1741,22 @@
                                         <input
                                             type="radio"
                                             name="relevantUnsupportedDraft"
-                                            className="h-4 w-4 mr-6"
+                                            className="h-4 w-4"
                                             checked={draftAccepted.relevantUnsupported === true}
                                             onChange={() => handleDraftSelection('relevantUnsupported', true)}
                                         />
+                                        <div className="w-16"></div>
                                         <span className="text-base text-gray-700">Yes</span>
                                     </label>
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
                                             name="relevantUnsupportedDraft"
-                                            className="h-4 w-4 mr-6"
+                                            className="h-4 w-4"
                                             checked={draftAccepted.relevantUnsupported === false}
                                             onChange={() => handleDraftSelection('relevantUnsupported', false)}
                                         />
+                                        <div className="w-16"></div>
                                         <span className="text-base text-gray-700">No</span>
                                     </label>
                                 </div>
